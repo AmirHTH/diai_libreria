@@ -1,15 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
-http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd">
     <http:listener-config name="HTTP_Listener_Configuration" host="localhost" port="8081" doc:name="HTTP Listener Configuration"/>
+    <file:connector name="File" autoDelete="true" streaming="true" validateConnections="true" doc:name="File"/>
+    <custom-transformer class="org.mule.transformer.JavaFileToPedido" name="JavaFileCSV_To_Pedido" doc:name="Java"/>
+    <file:file-to-string-transformer name="File_to_String" doc:name="File to String"/>
     <flow name="entrada_inicial">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/compra" doc:name="HTTP /compra"/>
         <http:static-resource-handler resourceBase="src/html" defaultFile="index.html" doc:name="HTTP Static Form Compra"/>
+    </flow>
+    <flow name="recibePedido_HTTP">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/pedido" doc:name="HTTP /pedido"/>
+        <set-payload value="#[message.inboundProperties.'http.request.uri']" encoding="ISO-8859-1" doc:name="Set Payload request uri "/>
+        <custom-transformer class="org.mule.transformer.HttpToPedido" doc:name="Java"/>
+        <echo-component doc:name="Echo"/>
+        <vm:outbound-endpoint exchange-pattern="one-way" path="procesaPedido" doc:name="VM"/>
+    </flow>
+    <flow name="recibePedido_CSV">
+        <file:inbound-endpoint path="tmp/input" moveToPattern="#[message.inboundProperties['originalFilename']].backup" moveToDirectory="tmp" connector-ref="File" responseTimeout="10000" transformer-refs="File_to_String JavaFileCSV_To_Pedido" doc:name="File CSV"/>
+        <echo-component doc:name="Echo"/>
+
+    </flow>
+    <flow name="diai_libreriaFlow1">
+        <vm:inbound-endpoint exchange-pattern="one-way" path="procesaPedido" doc:name="VM"/>
+        <echo-component doc:name="Echo"/>
     </flow>
 </mule>
