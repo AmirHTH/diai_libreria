@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Compras en Amazin Books</title>
+</head>
+<body>
+<h1>Amazin Books ESB edition</h1>
+	<h2>Intoduzca lo datos de su compra</h2>
+	
+	<form action="/facturacion" method="GET">
+		<p>Nombre:</p> <input type="text" name="nombre" />
+		 
+		<p>Apellidos:</p> <input ype="text" name="apellidos" />
+		 
+		<p>cif:</p> <input type="text"	name="cif" />
+		 
+		<p>direccion:</p> <input type="text" name="direccion" />
+		
+		<p>Seleccione las cantidades de cada producto:</p>
+		 
+		<p>Cien años de soledad</p>  <select name="producto1">
+			<option value="0">0</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+		</select> 
+		 
+		<p>Entrevista con el vampiro</p> <select name="producto2">
+			<option value="0">0</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+		</select> 
+		 
+		<p>Viridiana</p> <select name="producto3">
+			<option value="0">0</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+		</select> 
+		 
+		<p>Pax Romana</p> <select name="producto4">
+			<option value="0">0</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+		</select>  
+		<br/>
+		<input type="submit" value="Realizar pedido" />
+
+	</form>
+
+</body>
+</html>
