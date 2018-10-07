@@ -20,9 +20,9 @@ public class GeneraFactura  extends AbstractTransformer {
 		int preciomin  = 10;
 		int preciomax = 150;
 
-		String factura="";
+		String factura="\n";
 		
-		factura += "Factura Num.: "+ r.nextInt(max-min) + max; 
+		factura += "\n Factura Num.: "+ r.nextInt(max-min) + max; 
 		factura += "\n Empresa: Amazin Books (3463464R) Registro madrid 42,51,1";		
 		factura += "\n Para: "+ps.getNombreCompleto() +" ("+ps.getNIF()+")";		
 		factura += "\n PEDIDO: ";

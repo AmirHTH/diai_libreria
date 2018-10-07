@@ -34,7 +34,15 @@ public class DetectorMorosidad {
 			System.out.println("+");
 			System.out.println("+ La deuda de "+key+" es de "+value+ ". Su morosidad es "+ps.isMoroso());
 			System.out.println("+");
+			
+			if (result) {
+				System.out.println("+");
+				System.out.println("+ Debido a la deuda NO se concede la financiación solicitada a "+ ps.getNombreCompleto());
+				System.out.println("+");
+			}
 		}
+		
+		
 
 		return ps;
 	}

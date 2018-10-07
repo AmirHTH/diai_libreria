@@ -13,8 +13,20 @@ public class PedidoSimple {
 	private boolean stock;
 	private String cantidad, ISBN;
 	private String NIF, nombreCompleto;
-	private boolean financia, moroso;
+	private boolean financia, moroso, vip;
 	
+	
+	
+	public boolean isVip() {
+		return vip;
+	}
+
+
+	public void setVip(boolean vip) {
+		this.vip = vip;
+	}
+
+
 	public boolean isMoroso() {
 		return moroso;
 	}
@@ -85,8 +97,9 @@ public class PedidoSimple {
 
 	@Override
 	public String toString() {
-		return "PedidoSimple [NIF=" + NIF + ", nombreCompleto=" + nombreCompleto + ", financia=" + financia + ", stock="
-				+ stock + ", cantidad=" + cantidad + ", ISBN=" + ISBN + "]";
+		return "PedidoSimple [stock=" + stock + ", cantidad=" + cantidad + ", ISBN=" + ISBN + ", NIF=" + NIF
+				+ ", nombreCompleto=" + nombreCompleto + ", financia=" + financia + ", moroso=" + moroso + ", vip="
+				+ vip + "]";
 	}
 
 

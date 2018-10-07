@@ -1,0 +1,21 @@
+\nFINANCIACION Num.: 711093710000000
+ Empresa: Amazin Books (3463464R) Registro madrid 42,51,1
+ Para: Pepe Luis VIP (87654321)
+ PEDIDO: 
+	 ISBN: 0201615835	 Cantidad: 1
+ Se ha aceptado su solicitud de financiación. \n\nFINANCIACION Num.: 5996210000000
+ Empresa: Amazin Books (3463464R) Registro madrid 42,51,1
+ Para: Pepe Luis VIP (87654321)
+ PEDIDO: 
+	 ISBN: 0201485672	 Cantidad: 2
+ Se ha aceptado su solicitud de financiación. \n\nFINANCIACION Num.: 665889010000000
+ Empresa: Amazin Books (3463464R) Registro madrid 42,51,1
+ Para: Pepe Luis VIP (87654321)
+ PEDIDO: 
+	 ISBN: 0201485672	 Cantidad: 2
+ Se ha aceptado su solicitud de financiación. \n\nFINANCIACION Num.: 136933210000000
+ Empresa: Amazin Books (3463464R) Registro madrid 42,51,1
+ Para: Pepe Luis VIP (87654321)
+ PEDIDO: 
+	 ISBN: 0201615835	 Cantidad: 1
+ Se ha aceptado su solicitud de financiación. \n

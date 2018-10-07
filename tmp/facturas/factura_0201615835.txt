@@ -1,0 +1,23 @@
+Factura Num.: 491049810000000
+ Empresa: Amazin Books (3463464R) Registro madrid 42,51,1
+ Para: Pepe Luis moro (12345678)
+ PEDIDO: 
+	 ISBN: 0201615835	 Cantidad: 1
+ Total: 79150Factura Num.: 11302410000000
+ Empresa: Amazin Books (3463464R) Registro madrid 42,51,1
+ Para: Pepe Luis fin (123456)
+ PEDIDO: 
+	 ISBN: 0201615835	 Cantidad: 1
+ Total: 52150\n
+ Factura Num.: 338202710000000
+ Empresa: Amazin Books (3463464R) Registro madrid 42,51,1
+ Para: Pepe Luis VIP (87654321)
+ PEDIDO: 
+	 ISBN: 0201615835	 Cantidad: 1
+ Total: 86150\n
+ Factura Num.: 466993010000000
+ Empresa: Amazin Books (3463464R) Registro madrid 42,51,1
+ Para: Pepe Luis VIP (87654321)
+ PEDIDO: 
+	 ISBN: 0201615835	 Cantidad: 1
+ Total: 38150

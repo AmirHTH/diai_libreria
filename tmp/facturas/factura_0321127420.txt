@@ -1,0 +1,11 @@
+Factura Num.: 325783110000000
+ Empresa: Amazin Books (3463464R) Registro madrid 42,51,1
+ Para: Pepe Luis moro (12345678)
+ PEDIDO: 
+	 ISBN: 0321127420	 Cantidad: 3
+ Total: 10150Factura Num.: 732221310000000
+ Empresa: Amazin Books (3463464R) Registro madrid 42,51,1
+ Para: Pepe Luis fin (123456)
+ PEDIDO: 
+	 ISBN: 0321127420	 Cantidad: 3
+ Total: 4150

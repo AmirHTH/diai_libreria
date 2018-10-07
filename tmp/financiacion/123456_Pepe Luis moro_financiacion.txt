@@ -1,0 +1,16 @@
+FINANCIACION Num.: 748485810000000
+ Empresa: Amazin Books (3463464R) Registro madrid 42,51,1
+ Para: Pepe Luis moro (123456)
+ PEDIDO: 
+	 ISBN: 0201615835	 Cantidad: 1
+ Se ha aceptado su solicitud de financiación. FINANCIACION Num.: 626523810000000
+ Empresa: Amazin Books (3463464R) Registro madrid 42,51,1
+ Para: Pepe Luis moro (123456)
+ PEDIDO: 
+	 ISBN: 0201485672	 Cantidad: 2
+ Se ha aceptado su solicitud de financiación. FINANCIACION Num.: 417939510000000
+ Empresa: Amazin Books (3463464R) Registro madrid 42,51,1
+ Para: Pepe Luis moro (123456)
+ PEDIDO: 
+	 ISBN: 0321127420	 Cantidad: 3
+ Se ha aceptado su solicitud de financiación. 
