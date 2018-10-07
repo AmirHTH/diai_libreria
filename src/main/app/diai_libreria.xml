@@ -18,6 +18,8 @@ http://www.mulesoft.org/schema/mule/ee/wmq http://www.mulesoft.org/schema/mule/e
     <file:connector name="File" autoDelete="true" streaming="true" validateConnections="true" doc:name="File"/>
     <custom-transformer class="org.mule.transformer.JavaFileToPedido" name="JavaFileCSV_To_Pedido" doc:name="Java"/>
     <custom-transformer class="org.mule.transformer.GeneraFactura" name="JavaGeneraFactura" doc:name="Java"/>
+    <custom-transformer class="org.mule.transformer.GeneraCartaFinanciacion" name="JavaGeneraFinanciacionCarta" doc:name="Java"/>
+    
     
     <file:file-to-string-transformer name="File_to_String" doc:name="File to String"/>
 
@@ -75,11 +77,11 @@ http://www.mulesoft.org/schema/mule/ee/wmq http://www.mulesoft.org/schema/mule/e
                 <vm:outbound-endpoint exchange-pattern="one-way" path="emitirFactura" doc:name="VM Sin Financia Emitir Factura"/>
             </otherwise>
         </choice>
+        <vm:outbound-endpoint exchange-pattern="one-way" path="envioPedido" doc:name="VM_EnvioPedido"/>
     </flow>
     <flow name="EmitirFactura">
-        <vm:inbound-endpoint exchange-pattern="one-way" path="emitirFactura" doc:name="VM_emitirFactura"/>
+        <vm:inbound-endpoint exchange-pattern="one-way" path="emitir" doc:name="VM_emitirFactura"/>
         <echo-component doc:name="Echo"/>
-        <set-variable variableName="isbnTitle" value="#[payload.ISBN]" doc:name="Variable"/>
         <file:outbound-endpoint path="tmp/facturas" outputPattern="factura_#[isbnTitle].txt"  responseTimeout="10000" doc:name="FileFactura" connector-ref="FileAppend" transformer-refs="JavaGeneraFactura"/>
     </flow>
     <flow name="Financia">

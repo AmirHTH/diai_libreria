@@ -10,12 +10,19 @@ package org.mule.model;
  */
 public class PedidoSimple {
 	
-	private String NIF, nombreCompleto;
-	private boolean financia;
 	private boolean stock;
 	private String cantidad, ISBN;
+	private String NIF, nombreCompleto;
+	private boolean financia, moroso;
+	
+	public boolean isMoroso() {
+		return moroso;
+	}
 
 
+	public void setMoroso(boolean moroso) {
+		this.moroso = moroso;
+	}
 
 	public boolean isStock() {
 		return stock;
@@ -30,7 +37,6 @@ public class PedidoSimple {
 	public String getCantidad() {
 		return cantidad;
 	}
-
 
 	public void setCantidad(String cantidad) {
 		this.cantidad = cantidad;
