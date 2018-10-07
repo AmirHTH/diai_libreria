@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+<mule xmlns:wmq="http://www.mulesoft.org/schema/mule/ee/wmq" xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
@@ -11,11 +11,18 @@ http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/fil
 http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
 http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd
 http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
-http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd">
+http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
+http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd
+http://www.mulesoft.org/schema/mule/ee/wmq http://www.mulesoft.org/schema/mule/ee/wmq/current/mule-wmq-ee.xsd">
     <http:listener-config name="HTTP_Listener_Configuration" host="localhost" port="8081" doc:name="HTTP Listener Configuration"/>
     <file:connector name="File" autoDelete="true" streaming="true" validateConnections="true" doc:name="File"/>
     <custom-transformer class="org.mule.transformer.JavaFileToPedido" name="JavaFileCSV_To_Pedido" doc:name="Java"/>
     <file:file-to-string-transformer name="File_to_String" doc:name="File to String"/>
+
+    <file:connector name="FileWritter" autoDelete="false" streaming="true" validateConnections="true"  doc:name="File" outputPattern="Lista_Espera_#[payload.ISBN]_para_#[payload.NIF].txt"/>
+    <object-to-string-transformer name="Object_to_String" doc:name="Object to String"/>
+
+
     <flow name="entrada_inicial">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/compra" doc:name="HTTP /compra"/>
         <http:static-resource-handler resourceBase="src/html" defaultFile="index.html" doc:name="HTTP Static Form Compra"/>
@@ -37,7 +44,7 @@ http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/
         <vm:inbound-endpoint exchange-pattern="one-way" path="procesaPedido" doc:name="VM"/>
         <custom-transformer mimeType="application/csv" class="org.mule.transformer.PedidoToPedidoSimple" doc:name="ConvertToList"/>
         <collection-splitter doc:name="Collection Splitter"/>
-        <component class="org.mule.components.CheckStock" doc:name="Java Check Stock"/>
+        <custom-transformer class="org.mule.transformer.CheckStock" doc:name="Java"/>
         <echo-component doc:name="Echo"/>
         <choice doc:name="ChoiceDisponibilidad">
             <when expression="#[payload.stock]">
@@ -54,6 +61,7 @@ http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/
     </flow>
     <flow name="SinStock">
         <vm:inbound-endpoint exchange-pattern="one-way" path="SinStock" doc:name="VM_Stock_NO"/>
-        <logger level="INFO" doc:name="Logger"/>
+    
+        <file:outbound-endpoint path="tmp/listaEspera"  responseTimeout="10000"  doc:name="File Lista Espera" connector-ref="FileWritter" transformer-refs="Object_to_String"/>
     </flow>
 </mule>

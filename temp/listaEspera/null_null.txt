@@ -1,0 +1,1 @@
+PedidoSimple [NIF=12323, nombreCompleto=Pepe Luis, financia=true, stock=false, cantidad=3, ISBN=0321127420]

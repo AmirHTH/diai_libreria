@@ -13,20 +13,19 @@ public class PedidoSimple {
 	private String NIF, nombreCompleto;
 	private boolean financia;
 	private boolean stock;
-	
-	public boolean isInStock() {
+	private String cantidad, ISBN;
+
+
+
+	public boolean isStock() {
 		return stock;
 	}
 
 
-	public void setStockDisponible(boolean disponibilidad) {
-		this.stock = disponibilidad;
+	public void setStock(boolean stock) {
+		this.stock = stock;
 	}
 
-
-	private String cantidad, ISBN;
-	
-	
 
 	public String getCantidad() {
 		return cantidad;
