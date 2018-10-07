@@ -1,0 +1,6 @@
+Factura Num.: 668393010000000
+ Empresa: Amazin Books (3463464R) Registro madrid 42,51,1
+ Para: Pepe Luis 12323
+ PEDIDO: 
+	 ISBN: 0201485672	 Cantidad: 2
+ Total: 61150

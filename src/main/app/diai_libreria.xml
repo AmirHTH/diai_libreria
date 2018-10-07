@@ -17,11 +17,13 @@ http://www.mulesoft.org/schema/mule/ee/wmq http://www.mulesoft.org/schema/mule/e
     <http:listener-config name="HTTP_Listener_Configuration" host="localhost" port="8081" doc:name="HTTP Listener Configuration"/>
     <file:connector name="File" autoDelete="true" streaming="true" validateConnections="true" doc:name="File"/>
     <custom-transformer class="org.mule.transformer.JavaFileToPedido" name="JavaFileCSV_To_Pedido" doc:name="Java"/>
+    <custom-transformer class="org.mule.transformer.GeneraFactura" name="JavaGeneraFactura" doc:name="Java"/>
+    
     <file:file-to-string-transformer name="File_to_String" doc:name="File to String"/>
 
     <file:connector name="FileWritter" autoDelete="false" streaming="true" validateConnections="true"  doc:name="File" outputPattern="Lista_Espera_#[payload.ISBN]_para_#[payload.NIF].txt"/>
     <object-to-string-transformer name="Object_to_String" doc:name="Object to String"/>
-
+    <file:connector name="FileAppend" autoDelete="false" outputAppend="true" streaming="true" validateConnections="true" doc:name="File"/>
 
     <flow name="entrada_inicial">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/compra" doc:name="HTTP /compra"/>
@@ -55,13 +57,37 @@ http://www.mulesoft.org/schema/mule/ee/wmq http://www.mulesoft.org/schema/mule/e
             </otherwise>
         </choice>
     </flow>
-    <flow name="HayStock">
-        <vm:inbound-endpoint exchange-pattern="one-way" path="ConStock" doc:name="VM_Stock_SI"/>
-        <echo-component doc:name="Echo"/>
-    </flow>
     <flow name="SinStock">
         <vm:inbound-endpoint exchange-pattern="one-way" path="SinStock" doc:name="VM_Stock_NO"/>
-    
-        <file:outbound-endpoint path="tmp/listaEspera"  responseTimeout="10000"  doc:name="File Lista Espera" connector-ref="FileWritter" transformer-refs="Object_to_String"/>
+        <set-variable variableName="isbnTitle" value="#[payload.ISBN]" doc:name="VariableISBN"/>
+        <component class="org.mule.components.NotificacionRechazo" doc:name="JavaNotificacion"/>
+        <file:outbound-endpoint path="tmp/listaEspera" outputPattern="#[isbnTitle].txt" connector-ref="FileWritter" responseTimeout="10000" transformer-refs="Object_to_String" doc:name="File Lista Espera"/>
+    </flow>
+    <flow name="HayStock">
+        <vm:inbound-endpoint exchange-pattern="one-way" path="ConStock" doc:name="VM_Stock_SI"/>
+        <component class="org.mule.components.DecrementaStock" doc:name="JavaDecrementaStock"/>
+        <echo-component doc:name="Echo"/>
+        <choice doc:name="ChoiceFinanciacion">
+            <when expression="#[payload.financia]">
+                <vm:outbound-endpoint exchange-pattern="one-way" path="financiando" doc:name="VM_PideFinancia"/>
+            </when>
+            <otherwise>
+                <vm:outbound-endpoint exchange-pattern="one-way" path="emitirFactura" doc:name="VM Sin Financia Emitir Factura"/>
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="EmitirFactura">
+        <vm:inbound-endpoint exchange-pattern="one-way" path="emitirFactura" doc:name="VM_emitirFactura"/>
+        <echo-component doc:name="Echo"/>
+        <set-variable variableName="isbnTitle" value="#[payload.ISBN]" doc:name="Variable"/>
+        <file:outbound-endpoint path="tmp/facturas" outputPattern="factura_#[isbnTitle].txt"  responseTimeout="10000" doc:name="FileFactura" connector-ref="FileAppend" transformer-refs="JavaGeneraFactura"/>
+    </flow>
+    <flow name="Financia">
+        <vm:inbound-endpoint exchange-pattern="one-way" path="financiando" doc:name="VM_financiado"/>
+        <echo-component doc:name="Echo"/>
+    </flow>
+    <flow name="EnvioPedido">
+        <vm:inbound-endpoint exchange-pattern="one-way" path="envioPedido" doc:name="VM_envioPedido"/>
+        <echo-component doc:name="Echo"/>
     </flow>
 </mule>
