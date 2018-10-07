@@ -3,8 +3,11 @@
  */
 package org.mule.model;
 
+
 import java.util.HashMap;
+
 import java.util.Map;
+
 
 /**
  * @author uo240753
@@ -12,12 +15,28 @@ import java.util.Map;
  */
 public class Pedido {
 	
-	String NIF, nombreCompleto;
-	boolean financia;
-	Map<String, String> productos = new HashMap<String,String>();
+	private String NIF, nombreCompleto;
+	private boolean financia;
+	private Map<String, String> productos = new HashMap<String,String>();
+	//private List<ParLibroCantidad> listadoLibros  = new ArrayList<ParLibroCantidad>();
 	
+	/*
 	
+	public List<ParLibroCantidad> getListadoLibros() {
+		return listadoLibros;
+	}
+
+
+	public void setListadoLibros(List<ParLibroCantidad> listadoLibros) {
+		this.listadoLibros = listadoLibros;
+	}
 	
+	public void addLibroCantidad(ParLibroCantidad objeto) {
+		listadoLibros.add(objeto);
+	}
+	
+*/
+
 	public String getNIF() {
 		return NIF;
 	}

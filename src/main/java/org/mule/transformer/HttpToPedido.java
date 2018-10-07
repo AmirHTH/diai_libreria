@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.mule.api.transformer.TransformerException;
+
 import org.mule.model.Pedido;
 import org.mule.transformer.types.DataTypeFactory;
 
@@ -90,6 +91,11 @@ public class HttpToPedido extends AbstractTransformer {
 		
 		pedido.setProductos(listaLibros);
 		pedido.SOP_Pedidos();
+		/*listaLibros.forEach((k,v) ->{
+			pedido.addLibroCantidad(new ParLibroCantidad(k, v));
+		});*/
+		
+		
 		
 		return pedido;
 	}

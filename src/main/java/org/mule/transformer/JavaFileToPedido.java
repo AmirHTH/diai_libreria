@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.mule.api.transformer.TransformerException;
+
 import org.mule.model.Pedido;
 
 /**
@@ -39,7 +40,13 @@ public class JavaFileToPedido extends AbstractTransformer {
 			String[] libros = datos[i].split(";");
 			listaLibros.put(libros[0], libros[1]);
 		}
+		
 		pedido.setProductos(listaLibros);
+		
+		/*
+		listaLibros.forEach((k,v) ->{
+			pedido.addLibroCantidad(new ParLibroCantidad(k, v));
+		});*/
 		
 		System.out.println("Pedido csv: "+pedido);
 		pedido.SOP_Pedidos();
