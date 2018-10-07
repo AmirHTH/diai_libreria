@@ -37,9 +37,10 @@ http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/
         <vm:inbound-endpoint exchange-pattern="one-way" path="procesaPedido" doc:name="VM"/>
         <custom-transformer mimeType="application/csv" class="org.mule.transformer.PedidoToPedidoSimple" doc:name="ConvertToList"/>
         <collection-splitter doc:name="Collection Splitter"/>
-        <component class="org.mule.components.CheckStock" doc:name="Java"/>
+        <component class="org.mule.components.CheckStock" doc:name="Java Check Stock"/>
+        <echo-component doc:name="Echo"/>
         <choice doc:name="ChoiceDisponibilidad">
-            <when expression="payload.stock">
+            <when expression="#[payload.stock]">
                 <vm:outbound-endpoint exchange-pattern="one-way" path="ConStock" doc:name="VM_Stock_Disponible"/>
             </when>
             <otherwise>
@@ -47,11 +48,11 @@ http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/
             </otherwise>
         </choice>
     </flow>
-    <flow name="diai_libreriaFlow">
+    <flow name="HayStock">
         <vm:inbound-endpoint exchange-pattern="one-way" path="ConStock" doc:name="VM_Stock_SI"/>
         <echo-component doc:name="Echo"/>
     </flow>
-    <flow name="diai_libreriaFlow1">
+    <flow name="SinStock">
         <vm:inbound-endpoint exchange-pattern="one-way" path="SinStock" doc:name="VM_Stock_NO"/>
         <logger level="INFO" doc:name="Logger"/>
     </flow>

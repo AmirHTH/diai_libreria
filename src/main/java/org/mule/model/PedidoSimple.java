@@ -11,15 +11,16 @@ package org.mule.model;
 public class PedidoSimple {
 	
 	private String NIF, nombreCompleto;
-	private boolean financia, stock=false;
+	private boolean financia;
+	private boolean stock;
 	
 	public boolean isInStock() {
 		return stock;
 	}
 
 
-	public void setStockDisponible(boolean stock) {
-		this.stock = stock;
+	public void setStockDisponible(boolean disponibilidad) {
+		this.stock = disponibilidad;
 	}
 
 
@@ -79,9 +80,10 @@ public class PedidoSimple {
 
 	@Override
 	public String toString() {
-		return "PedidoSimple [NIF=" + NIF + ", nombreCompleto=" + nombreCompleto + ", financia=" + financia
-				+ ", cantidad=" + cantidad + ", ISBN=" + ISBN + " Disponible="+ stock +"]";
+		return "PedidoSimple [NIF=" + NIF + ", nombreCompleto=" + nombreCompleto + ", financia=" + financia + ", stock="
+				+ stock + ", cantidad=" + cantidad + ", ISBN=" + ISBN + "]";
 	}
+
 
 
 
