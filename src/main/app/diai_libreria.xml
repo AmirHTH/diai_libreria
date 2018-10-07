@@ -80,13 +80,26 @@ http://www.mulesoft.org/schema/mule/ee/wmq http://www.mulesoft.org/schema/mule/e
         <vm:outbound-endpoint exchange-pattern="one-way" path="envioPedido" doc:name="VM_EnvioPedido"/>
     </flow>
     <flow name="EmitirFactura">
-        <vm:inbound-endpoint exchange-pattern="one-way" path="emitir" doc:name="VM_emitirFactura"/>
-        <echo-component doc:name="Echo"/>
+        <vm:inbound-endpoint exchange-pattern="one-way" path="emitirFactura" doc:name="VM_emitirFactura"/>
+        <set-variable variableName="isbnTitle" value="#[payload.ISBN]" doc:name="Variable"/>
         <file:outbound-endpoint path="tmp/facturas" outputPattern="factura_#[isbnTitle].txt"  responseTimeout="10000" doc:name="FileFactura" connector-ref="FileAppend" transformer-refs="JavaGeneraFactura"/>
     </flow>
-    <flow name="Financia">
+    <flow name="tramitaFinanciacion">
         <vm:inbound-endpoint exchange-pattern="one-way" path="financiando" doc:name="VM_financiado"/>
-        <echo-component doc:name="Echo"/>
+        <component class="org.mule.components.DetectorMorosidad" doc:name="JavaCheckMorosidad"/>
+        <choice doc:name="Choice">
+            <when expression="#[payload.moroso]">
+                <vm:outbound-endpoint exchange-pattern="one-way" path="emitirFactura" doc:name="VM_ES_MOROSO_emitirFactura"/>
+            </when>
+            <otherwise>
+                <vm:outbound-endpoint exchange-pattern="one-way" path="concedeFinanciacion" doc:name="VM_concederFinanciacion"/>
+            </otherwise>
+        </choice>
+    </flow>
+    <flow name="concedeFinanciacion">
+        <vm:inbound-endpoint exchange-pattern="one-way" path="concedeFinanciacion" doc:name="VM_concedeFinanciacion"/>
+        <set-variable variableName="usuario" value="#[payload.NIF]_#[payload.nombreCompleto]" doc:name="Variable usuario"/>
+        <file:outbound-endpoint path="tmp/financiacion" outputPattern="#[usuario]_financiacion.txt" connector-ref="FileAppend" responseTimeout="10000" transformer-refs="JavaGeneraFinanciacionCarta" doc:name="FileFinanciacionCreacion"/>
     </flow>
     <flow name="EnvioPedido">
         <vm:inbound-endpoint exchange-pattern="one-way" path="envioPedido" doc:name="VM_envioPedido"/>

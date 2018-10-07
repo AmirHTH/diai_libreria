@@ -23,11 +23,11 @@ public class GeneraFactura  extends AbstractTransformer {
 		String factura="";
 		
 		factura += "Factura Num.: "+ r.nextInt(max-min) + max; 
-		factura += "/n Empresa: Amazin Books (3463464R) Registro madrid 42,51,1";		
-		factura += "/n Para: "+ps.getNombreCompleto() +" ("+ps.getNIF()+")";		
-		factura += "/n PEDIDO: ";
-		factura += "/n/t ISBN: "+ps.getISBN() + "/t Cantidad: "+ps.getCantidad();
-		factura += "/n Total: "+ r.nextInt(preciomax-preciomin) + preciomax;
+		factura += "\n Empresa: Amazin Books (3463464R) Registro madrid 42,51,1";		
+		factura += "\n Para: "+ps.getNombreCompleto() +" ("+ps.getNIF()+")";		
+		factura += "\n PEDIDO: ";
+		factura += "\n\t ISBN: "+ps.getISBN() + "\t Cantidad: "+ps.getCantidad();
+		factura += "\n Total: "+ r.nextInt(preciomax-preciomin) + preciomax;
 		System.out.println(factura);
 		return factura;
 	}

@@ -21,11 +21,11 @@ public class GeneraCartaFinanciacion  extends AbstractTransformer {
 		String financia="";
 		
 		financia += "FINANCIACION Num.: "+ r.nextInt(max-min) + max; 
-		financia += "/n Empresa: Amazin Books (3463464R) Registro madrid 42,51,1";		
-		financia += "/n Para: "+ps.getNombreCompleto() +" ("+ps.getNIF()+")";		
-		financia += "/n PEDIDO: ";
-		financia += "/n/t ISBN: "+ps.getISBN() + "/t Cantidad: "+ps.getCantidad();
-		financia += "/n Se ha aceptado su solicitud de financiación. ";
+		financia += "\n Empresa: Amazin Books (3463464R) Registro madrid 42,51,1";		
+		financia += "\n Para: "+ps.getNombreCompleto() +" ("+ps.getNIF()+")";		
+		financia += "\n PEDIDO: ";
+		financia += "\n\t ISBN: "+ps.getISBN() + "\t Cantidad: "+ps.getCantidad();
+		financia += "\n Se ha aceptado su solicitud de financiación. ";
 		System.out.println(financia);
 		return financia;
 	}

@@ -22,7 +22,7 @@ public class DetectorMorosidad {
 			e.printStackTrace();
 		}	
 
-		String key = ps.getNIF();		
+		String key = ps.getNIF();	
 
 		if (morosidad.containsKey(key)) {
 			String value = morosidad.getProperty(key);
@@ -32,7 +32,7 @@ public class DetectorMorosidad {
 			ps.setMoroso(result);
 			
 			System.out.println("+");
-			System.out.println("+ La deuda de "+key+" es de "+value+ " Su morosidad es "+ps.isMoroso());
+			System.out.println("+ La deuda de "+key+" es de "+value+ ". Su morosidad es "+ps.isMoroso());
 			System.out.println("+");
 		}
 
