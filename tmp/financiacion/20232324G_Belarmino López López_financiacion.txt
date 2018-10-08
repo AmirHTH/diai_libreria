@@ -1,19 +1,19 @@
 
-FINANCIACION Num.: 679550710000000
+FINANCIACION Num.: 325602110000000
  Empresa: Amazin Books (3463464R) Registro madrid 42,51,1
- Para: Pepe Luis VIP (87654321)
+ Para: Belarmino López López (20232324G)
  PEDIDO: 
-	 ISBN: 0201485672	 Cantidad: 2
+	 ISBN: 0201615835	 Cantidad: 3
  Se ha aceptado su solicitud de financiación. \n
-FINANCIACION Num.: 561083210000000
+FINANCIACION Num.: 479633110000000
  Empresa: Amazin Books (3463464R) Registro madrid 42,51,1
- Para: Pepe Luis VIP (87654321)
+ Para: Belarmino López López (20232324G)
  PEDIDO: 
-	 ISBN: 0201615835	 Cantidad: 1
+	 ISBN: 0201485672	 Cantidad: 5
  Se ha aceptado su solicitud de financiación. \n
-FINANCIACION Num.: 879678410000000
+FINANCIACION Num.: 778980810000000
  Empresa: Amazin Books (3463464R) Registro madrid 42,51,1
- Para: Pepe Luis VIP (87654321)
+ Para: Belarmino López López (20232324G)
  PEDIDO: 
-	 ISBN: 0321127420	 Cantidad: 3
+	 ISBN: 0321127420	 Cantidad: 7
  Se ha aceptado su solicitud de financiación. \n

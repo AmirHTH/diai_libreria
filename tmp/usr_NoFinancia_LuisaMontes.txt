@@ -1,0 +1,4 @@
+NIF;Nombre Cliente;Financia
+55255255;Luisa Montes Grandes;N
+ISBN;Cantidad;
+0321127420;1;

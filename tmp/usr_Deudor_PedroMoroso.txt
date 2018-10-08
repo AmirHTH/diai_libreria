@@ -1,0 +1,7 @@
+NIF;Nombre Cliente;Financia
+35656224;Pedro Moroso Sinduro;S
+ISBN;Cantidad;
+0321127420;1;
+0201485672;2;
+1933988967;3;
+0201615835;9;

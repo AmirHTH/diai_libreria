@@ -81,8 +81,9 @@ http://www.mulesoft.org/schema/mule/ee/wmq http://www.mulesoft.org/schema/mule/e
     </flow>
     <flow name="EmitirFactura">
         <vm:inbound-endpoint exchange-pattern="one-way" path="emitirFactura" doc:name="VM_emitirFactura"/>
-        <set-variable variableName="isbnTitle" value="#[payload.ISBN]" doc:name="Variable"/>
-        <file:outbound-endpoint path="tmp/facturas" outputPattern="factura_#[isbnTitle].txt"  responseTimeout="10000" doc:name="FileFactura" connector-ref="FileAppend" transformer-refs="JavaGeneraFactura"/>
+        <collection-aggregator timeout="5000" failOnTimeout="false" doc:name="Collection Aggregator"/>
+        <set-variable variableName="usr" value="#[payload[0].NIF]_#[payload[0].nombreCompleto]" doc:name="Variable"/>
+        <file:outbound-endpoint path="tmp/facturas" outputPattern="factura_#[usr].txt"  responseTimeout="10000" doc:name="FileFactura" connector-ref="FileAppend" transformer-refs="JavaGeneraFactura"/>
     </flow>
     <flow name="tramitaFinanciacion">
         <vm:inbound-endpoint exchange-pattern="one-way" path="financiando" doc:name="VM_financiado"/>
