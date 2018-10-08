@@ -24,3 +24,4 @@ hs_err_pid*
 tmp/aa.txt.backup
 tmp/listaEspera/Lista_Espera_null_para_null.txt
 tmp/listaEspera/*
+tmp/*
