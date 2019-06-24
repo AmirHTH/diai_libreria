@@ -85,7 +85,7 @@ http://www.mulesoft.org/schema/mule/ee/wmq http://www.mulesoft.org/schema/mule/e
         <collection-aggregator timeout="5000" failOnTimeout="false" doc:name="Collection Aggregator"/>
         <set-variable variableName="usr" value="#[payload[0].NIF]_#[payload[0].nombreCompleto]" doc:name="Variable"/>
         <file:outbound-endpoint path="tmp/facturas" outputPattern="factura_#[usr].txt"  responseTimeout="10000" doc:name="FileFactura" connector-ref="FileAppend" transformer-refs="JavaGeneraFactura"/>
-        <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="amazin.travels.miw@gmail.com" password="miw.224485" connector-ref="Gmail" to="uo240753@uniovi.es" from="amazin.travels.miw@gmail.com" subject="Su factura se ha emitido con exito! " cc="uo240753@uniovi.es" responseTimeout="10000" transformer-refs="JavaGeneraFactura" doc:name="SMTP Factura Mail"/>
+        <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="amazin.travels.miw@gmail.com" password="NOPE" connector-ref="Gmail" to="uo240753@uniovi.es" from="amazin.travels.miw@gmail.com" subject="Su factura se ha emitido con exito! " cc="uo240753@uniovi.es" responseTimeout="10000" transformer-refs="JavaGeneraFactura" doc:name="SMTP Factura Mail"/>
     </flow>
     <flow name="tramitaFinanciacion">
         <vm:inbound-endpoint exchange-pattern="one-way" path="financiando" doc:name="VM_financiado"/>
